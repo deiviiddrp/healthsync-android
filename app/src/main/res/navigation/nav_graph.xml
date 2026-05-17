@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.healthsync.android.ui.DashboardFragment"
+        android:label="Inicio"/>
+
+    <fragment
+        android:id="@+id/historialFragment"
+        android:name="com.healthsync.android.ui.HistorialFragment"
+        android:label="Historial"/>
+
+    <fragment
+        android:id="@+id/citasFragment"
+        android:name="com.healthsync.android.ui.CitasFragment"
+        android:label="Citas"/>
+
+    <fragment
+        android:id="@+id/alertasFragment"
+        android:name="com.healthsync.android.ui.AlertasFragment"
+        android:label="Alertas"/>
+
+</navigation>
