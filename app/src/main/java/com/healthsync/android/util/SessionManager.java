@@ -13,6 +13,7 @@ public class SessionManager {
     private static final String KEY_ACCESS  = "access_token";
     private static final String KEY_REFRESH = "refresh_token";
     private static final String KEY_EMAIL   = "user_email";
+    private static final String KEY_FCM     = "fcm_token";
 
     private final SharedPreferences prefs;
 
@@ -29,7 +30,6 @@ public class SessionManager {
                     EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                     EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
         } catch (GeneralSecurityException | IOException e) {
-            // Fallback seguro si falla el cifrado
             p = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         }
         this.prefs = p;
@@ -46,9 +46,14 @@ public class SessionManager {
         prefs.edit().putString(KEY_EMAIL, email).apply();
     }
 
+    public void saveFcmToken(String token) {
+        prefs.edit().putString(KEY_FCM, token).apply();
+    }
+
     public String getAccessToken()  { return prefs.getString(KEY_ACCESS, null); }
     public String getRefreshToken() { return prefs.getString(KEY_REFRESH, null); }
     public String getEmail()        { return prefs.getString(KEY_EMAIL, null); }
+    public String getFcmToken()     { return prefs.getString(KEY_FCM, null); }
 
     public boolean isLoggedIn() { return getAccessToken() != null; }
 
