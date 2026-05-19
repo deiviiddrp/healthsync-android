@@ -52,8 +52,7 @@ public class ParametroVitalAdapter extends
         void bind(ParametroVitalResponse item) {
             b.tvTipo.setText(formatTipo(item.getTipoParametro()));
             b.tvValor.setText(item.getValor() + " " + item.getUnidad());
-            b.tvFecha.setText(item.getFechaHora() != null
-                    ? item.getFechaHora() : "");
+            b.tvFecha.setText(formatFecha(item.getFechaHora()));
 
             String semaforo = item.getEstadoSemaforo();
             int color;
@@ -67,6 +66,18 @@ public class ParametroVitalAdapter extends
                 };
             }
             b.viewSemaforo.setBackgroundColor(color);
+        }
+
+        private String formatFecha(String fechaHora) {
+            if (fechaHora == null) return "";
+            try {
+                String[] parts = fechaHora.split("T");
+                String[] fecha = parts[0].split("-");
+                String hora = parts[1].substring(0, 5);
+                return fecha[2] + "/" + fecha[1] + "/" + fecha[0] + " " + hora;
+            } catch (Exception e) {
+                return fechaHora;
+            }
         }
 
         private String formatTipo(String tipo) {
